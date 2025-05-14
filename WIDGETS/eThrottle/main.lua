@@ -582,7 +582,8 @@ local function background(wgt)
         if wgt.fmGovLostHs and wgt.fmGovLostHs ~= govLostHs then
             playAudio("auto")
             playAudio("bad")
-            playHaptic(100, 0)
+            -- no haptic feedback on critical
+            -- playHaptic(100, 0)
         end
     else
         -- not connected

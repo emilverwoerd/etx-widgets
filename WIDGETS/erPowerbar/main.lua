@@ -369,7 +369,8 @@ local function background(wgt)
             playAudio("batlow")
         else
             playAudio("batcrt")
-            playHaptic(100, 0, PLAY_NOW)
+            -- no haptic feedback on critical
+            -- playHaptic(100, 0, PLAY_NOW)
         end
 
         -- play % if >= 0
