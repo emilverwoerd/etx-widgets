@@ -65,6 +65,7 @@ local _options = {
     { "MahSensor"             , SOURCE, 0 },
     { "Reserve"               , VALUE, 20, 0, 1000 },   -- reserve (or filter samples if calc percentage)
     { "Cells"                 , VALUE, 0, 0, 14 },      -- cell detection time (or interval if calc perceentage)
+    { "EnableHaptic"          , BOOL, 0 },              -- enable haptic feedback
 }
 
 -- Data gathered from commercial lipo sensors
@@ -716,8 +717,10 @@ local function background(wgt)
                 playAudio("batlow")
             else
                 playAudio("batcrt")
-                -- no haptic feedback on critical
-                -- playHaptic(100, 0, PLAY_NOW)
+                -- play haptic feedback on critical if enabled
+                if wgt.options.EnableHaptic == 1 then
+                    playHaptic(100, 0, PLAY_NOW)
+                end
             end
 
             -- play % if >= 0

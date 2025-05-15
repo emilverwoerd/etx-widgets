@@ -31,6 +31,7 @@ local _options = {
     { "FlightModeSensor"  , SOURCE, 0 },
     { "EscStatus"         , SOURCE, 0 },
     { "Color"             , COLOR, BLACK },
+    { "EnableHaptic"      , BOOL, 0 },              -- enable haptic feedback
 }
 
 local FM_MODE_FM        = 0
@@ -576,14 +577,14 @@ local function background(wgt)
                 playAudio("disarm")
             end
             wgt.armed = armed
-        end
-
-        -- announce if bailout failed
+        end        -- announce if bailout failed
         if wgt.fmGovLostHs and wgt.fmGovLostHs ~= govLostHs then
             playAudio("auto")
             playAudio("bad")
-            -- no haptic feedback on critical
-            -- playHaptic(100, 0)
+            -- play haptic feedback if enabled
+            if wgt.options.EnableHaptic == 1 then
+                playHaptic(100, 0)
+            end
         end
     else
         -- not connected
