@@ -577,7 +577,9 @@ local function background(wgt)
                 playAudio("disarm")
             end
             wgt.armed = armed
-        end        -- announce if bailout failed
+        end        
+        
+        -- announce if bailout failed
         if wgt.fmGovLostHs and wgt.fmGovLostHs ~= govLostHs then
             playAudio("auto")
             playAudio("bad")
